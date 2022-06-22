@@ -1,0 +1,19 @@
+{
+  "name": "@lif3ng-utils/login",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "build": "^0.1.4",
+    "unocss": "^0.39.3",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "vite": "3.0.0-beta.1"
+  }
+}
