@@ -1,6 +1,15 @@
 {
   "name": "@lif3ng/login",
-  "version": "0.0.2",
+  "version": "0.0.22",
+  "module": "dist/my-login.es.js",
+  "main": "dist/my-login.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-login.es.js",
+      "require": "./dist/my-login.umd.js"
+    }
+  },
+  "homepage": "https://github.com/lif3ng-utils/login",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,18 +19,23 @@
     "dist"
   ],
   "dependencies": {
-    "@cloudbase/js-sdk": "^1.7.2",
     "axios": "^0.27.2",
-    "build": "^0.1.4",
-    "unocss": "^0.39.3",
-    "vue": "^3.2.25",
     "vue-demi": "^0.13.1"
   },
   "devDependencies": {
+    "@cloudbase/js-sdk": "^1.7.2",
     "@vitejs/plugin-vue": "^2.3.3",
-    "vite": "3.0.0-beta.1"
+    "unocss": "^0.39.3",
+    "vite": "2",
+    "vue": "^3.2.37"
   },
   "peerDependencies": {
-    "@cloudbase/js-sdk": "^1.0.0"
+    "@vue/composition-api": "^1.0.0",
+    "vue": "^2.0.0 || ^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   }
 }

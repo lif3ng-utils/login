@@ -1,24 +1,33 @@
 <template>
-  <template v-if="step === 0">
-    <input v-model="mail" type="email" />
-    <button @click="send">send code</button>
+  <template v-if="!loginState">
+    <template v-if="step === 0">
+      <input v-model="mail" type="email" />
+      <button @click="send">send code</button>
+    </template>
+    <template v-else-if="step === 1">
+      <input v-model="code" />
+      <button @click="check">login</button>
+    </template>
   </template>
-  <template v-else-if="step === 1">
-    <input v-model="code" />
-    <button @click="check">login</button>
+  <template v-else>
+    {{ loginState.user.customUserId }}
+    <button @click="auth.signOut">logout</button>
   </template>
 </template>
 <script setup>
-import { reactive, ref } from "vue-demi";
+import { reactive, ref, watch } from "vue-demi";
 import { sendCodeByMail, checkCode } from "../service";
-import tcb from "@cloudbase/js-sdk";
+import { auth, useLoginState } from "../tcb/auth";
 
-const app = tcb.init({
-  env: "env1-119983",
-});
+const loginState = useLoginState();
 
-const auth = app.auth();
-console.log({ auth });
+watch(
+  loginState,
+  (state) => {
+    console.log("state change", state);
+  },
+  { immediate: true }
+);
 const step = ref(0);
 const mail = ref("");
 const code = ref("");
