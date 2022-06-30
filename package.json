@@ -1,6 +1,6 @@
 {
   "name": "@lif3ng/login",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "module": "dist/my-login.es.js",
   "main": "dist/my-login.umd.js",
   "exports": {
