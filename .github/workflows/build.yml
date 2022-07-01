@@ -4,8 +4,7 @@
 name: Build & Publish
 
 on:
-  create:
-    branches: ["main"]
+  create
 
 jobs:
   build-lib:
