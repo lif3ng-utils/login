@@ -25,7 +25,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["vue-demi", "vue"],
+    exclude: ["vue"],
   },
 
   plugins: [vue(), Unocss({})],
