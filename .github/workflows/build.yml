@@ -43,3 +43,9 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=${{secrets.npm_token}}" >> .npmrc
       - name: Publish
         run: npm publish
+      
+      - name: Publish vue2 version
+        run: npm i -g json
+        run: json -I -f package.json -e "this.name=\"@lif3ng/login-vue2\"
+        run: npx vue-demi-switch 2
+        # run: 
