@@ -1,18 +1,20 @@
 <template>
-  <template v-if="!loginState">
-    <template v-if="step === 0">
-      <input v-model="mail" type="email" />
-      <button @click="send">send code</button>
+  <div>
+    <template v-if="!loginState">
+      <template v-if="step === 0">
+        <input v-model="mail" type="email" />
+        <button @click="send">send code</button>
+      </template>
+      <template v-else-if="step === 1">
+        <input v-model="code" />
+        <button @click="check">login</button>
+      </template>
     </template>
-    <template v-else-if="step === 1">
-      <input v-model="code" />
-      <button @click="check">login</button>
+    <template v-else>
+      {{ loginState.user.customUserId }}
+      <button @click="auth.signOut">logout</button>
     </template>
-  </template>
-  <template v-else>
-    {{ loginState.user.customUserId }}
-    <button @click="auth.signOut">logout</button>
-  </template>
+  </div>
 </template>
 <script setup>
 import { reactive, ref, watch } from "vue-demi";
