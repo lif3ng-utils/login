@@ -3,8 +3,7 @@
 
 name: Build & Publish
 
-on:
-  create
+on: create
 
 jobs:
   build-lib:
@@ -43,9 +42,10 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=${{secrets.npm_token}}" >> .npmrc
       - name: Publish
         run: npm publish
-      
+
       - name: Publish vue2 version
-        run: npm i -g json
-        run: json -I -f package.json -e "this.name=\"@lif3ng/login-vue2\"
-        run: npx vue-demi-switch 2
-        # run: 
+      - run: npm i -g json
+      - run: json -I -f package.json -e "this.name=\"@lif3ng/login-vue2\"
+      - run: npx vue-demi-switch 2
+      - run: pnpm run build
+      - run: npm publish
