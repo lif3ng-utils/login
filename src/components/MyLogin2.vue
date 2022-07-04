@@ -3,5 +3,9 @@
 </template>
 
 <script>
-export default { name: "MyLogin" };
+import { defineComponent } from "vue-demi";
+
+export default defineComponent({
+  name: "MyLogin",
+});
 </script>
