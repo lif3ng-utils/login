@@ -1,8 +1,12 @@
 import { defineConfig } from "vite";
 import path from "path";
+import { isVue2 } from "vue-demi";
 import vue from "@vitejs/plugin-vue";
+// import { createVuePlugin as vue2 } from "vite-plugin-vue2";
 import Unocss from "unocss/vite";
 
+console.log({ isVue2 });
+// const vue = isVue2 ? vue2 : vue3;
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
