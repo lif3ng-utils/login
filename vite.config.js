@@ -9,6 +9,11 @@ console.log({ isVue2 });
 // const vue = isVue2 ? vue2 : vue3;
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      vue: path.resolve(__dirname, `./node_modules/${isVue2 ? "vue2" : "vue"}`),
+    },
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, "lib/entry.js"),

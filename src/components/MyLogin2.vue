@@ -1,11 +1,14 @@
-<template>
+<!-- <template>
   <div>login</div>
-</template>
+</template> -->
 
 <script>
-import { defineComponent } from "vue-demi";
+import { defineComponent, h } from "vue-demi";
 
 export default defineComponent({
   name: "MyLogin",
+  render() {
+    return h("div", "login");
+  },
 });
 </script>
