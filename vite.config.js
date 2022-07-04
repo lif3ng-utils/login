@@ -30,6 +30,7 @@ export default defineConfig({
         globals: {
           vue: "Vue",
           vue2: "Vue",
+          axios: "axios",
           "@cloudbase/js-sdk": "cloudbase",
         },
       },
