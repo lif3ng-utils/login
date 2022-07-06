@@ -2,17 +2,19 @@ import { defineConfig } from "vite";
 import path from "path";
 import { isVue2 } from "vue-demi";
 import vue from "@vitejs/plugin-vue";
+// import vueJsx from "@vitejs/plugin-vue-jsx";
 // import { createVuePlugin as vue2 } from "vite-plugin-vue2";
 import Unocss from "unocss/vite";
+import { presetUno, presetIcons } from "unocss";
 
 console.log({ isVue2 });
 // const vue = isVue2 ? vue2 : vue3;
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    alias: {
-      vue: path.resolve(__dirname, `./node_modules/${isVue2 ? "vue2" : "vue"}`),
-    },
+    // alias: {
+    //   vue: path.resolve(__dirname, `./node_modules/${isVue2 ? "vue2" : "vue"}`),
+    // },
   },
   build: {
     lib: {
@@ -42,9 +44,32 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["vue"],
+    exclude: ["vue", "vue-demi"],
   },
 
-  plugins: [vue(), Unocss({})],
+  plugins: [
+    vue(),
+    Unocss({
+      presets: [
+        presetUno(),
+        presetIcons({
+          scale: 1.2,
+          warn: true,
+          extraProperties: {
+            display: "inline-block",
+          },
+        }),
+        //   UnocssIcons({
+        //     prefix: "i-",
+        //     extraProperties: {
+        //       display: "inline-block",
+        //     },
+        //     collections: {
+        //       eos: () => import("@iconify-json/eos-icons"),
+        //     },
+        //   }),
+      ],
+    }),
+  ],
   server: { port: 3000 },
 });
