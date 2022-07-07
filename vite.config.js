@@ -8,6 +8,11 @@ import Unocss from "unocss/vite";
 import { presetUno, presetIcons } from "unocss";
 
 console.log({ isVue2 });
+
+const isBuildPages = process.env.BUILD_TYPE === "pages";
+const isBuildLib = process.env.BUILD_TYPE === "lib";
+console.log({ isBuildPages, isBuildLib });
+
 // const vue = isVue2 ? vue2 : vue3;
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,36 +21,41 @@ export default defineConfig({
     //   vue: path.resolve(__dirname, `./node_modules/${isVue2 ? "vue2" : "vue"}`),
     // },
   },
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, "lib/entry.js"),
-      name: "MyLogin",
-      // the proper extensions will be added
-      fileName: "my-login",
-    },
-    rollupOptions: {
-      // 确保外部化处理那些你不想打包进库的依赖
-      external: [
-        "vue",
-        "vue2",
-        "@vue/composition-api",
-        "@cloudbase/js-sdk",
-        "axios",
-      ],
-      output: {
-        // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
-        globals: {
-          vue: "Vue",
-          vue2: "Vue",
-          axios: "axios",
-          "@cloudbase/js-sdk": "cloudbase",
+  ...(isBuildPages && {
+    base: "/login/",
+  }),
+  ...(isBuildLib && {
+    build: {
+      lib: {
+        entry: path.resolve(__dirname, "lib/entry.js"),
+        name: "MyLogin",
+        // the proper extensions will be added
+        fileName: "my-login",
+      },
+      rollupOptions: {
+        // 确保外部化处理那些你不想打包进库的依赖
+        external: [
+          "vue",
+          "vue2",
+          "@vue/composition-api",
+          "@cloudbase/js-sdk",
+          "axios",
+        ],
+        output: {
+          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+          globals: {
+            vue: "Vue",
+            vue2: "Vue",
+            axios: "axios",
+            "@cloudbase/js-sdk": "cloudbase",
+          },
         },
       },
     },
-  },
-  optimizeDeps: {
-    exclude: ["vue", "vue-demi"],
-  },
+    optimizeDeps: {
+      exclude: ["vue", "vue-demi"],
+    },
+  }),
 
   plugins: [
     vue(),
@@ -59,15 +69,6 @@ export default defineConfig({
             display: "inline-block",
           },
         }),
-        //   UnocssIcons({
-        //     prefix: "i-",
-        //     extraProperties: {
-        //       display: "inline-block",
-        //     },
-        //     collections: {
-        //       eos: () => import("@iconify-json/eos-icons"),
-        //     },
-        //   }),
       ],
     }),
   ],
